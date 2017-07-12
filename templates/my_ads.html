@@ -1,0 +1,157 @@
+{% extends "Base.html" %}
+{% set active_page = "my_ads" %}
+{% block content %}	
+	{% block container %}
+	<div class="row">
+	<div class="col-sm-12">
+	<br><br><h3 style="margin-bottom:40px">   Ads Details:</h3><hr>
+	<h3 style="margin-bottom:40px">Change your ad or delete it!</h3><hr style="margin-bottom:90px">
+	<h3 style="color:red">{{msg}}</h3>
+	</div>
+	{% for house in houses %}
+	
+	<div class="col-sm-12">
+	
+				<ul class="list-group" style="margin-bottom:50px" >             
+					<li class="list-group-item">
+						<div class="container-fluid">
+							<div class="imgspace col-sm-3">
+								 <img src="/static/images/{{house.Image}}" class="img-responsive" alt="Cinque Terre"> 
+							</div>						
+							<div class="up">								
+								<div class="col-sm-5">
+								<form id="deleteads" class="form-horizontal" role="form" method="post" action = "{{ url_for('delete_ads') }}" name="login">
+								<label>Location: {{house.Area}} </label>
+								</div>
+								<div class="col-sm-3">
+								<label>Price: {{house.Price}}€</label>
+								</div>
+								<div class="col-sm-3">
+								<label>Size: {{house.Size}} m<sup>2</sup></label>
+								</div>								
+								<div class="col-xs-12 col-sm-12">
+								<p>Description: {{house.Description}}
+								</p> 
+								</div>
+								<br>
+								<div class="col-sm-5">
+								<label class="control-label col-sm-2">AdID:</label>
+								<div class="col-sm-3"><input class="form-control" id="id_ad" name="id_ad" value="{{house.AdID}}" type="text" readonly="true"></div>
+								</div>
+								<div class="col-sm-2">
+								<input name="Submit" type="submit" value="Delete" class="btn btn-danger">	
+								</div>
+								</form>
+								<div class="col-sm-2">
+								<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal{{house.AdID}}">Edit Ad</button>
+								</div>						    
+							</div>
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+<!-- Modal -->
+<div id="myModal{{house.AdID}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Ad</h4>
+      </div>
+      <div class="modal-body">
+	  <!--here starts form-->
+        <form class="form-horizontal" name="edit_ads" id="add_house" role="form" method="post" action = "{{ url_for('edit_ads') }}" enctype="multipart/form-data" >
+		<br>
+          <div class="form-group">
+			  <div class="col-sm-2"></div>
+			  <label class="control-label col-sm-1">AdID:</label>
+			  <div class="col-sm-2"><input class="form-control" id="ad_id" name="ad_id" value="{{house.AdID}}" type="text" readonly="true"></div>
+		 </div>
+          <div class="form-group">
+			<label class="control-label col-sm-3">For:</label>
+				<div class="col-sm-4">
+					<select class="form-control" id="purpose1" name="purpose1">
+						<option selected="selected">{{house.Purpose}}</option>
+						<option>Rent</option>
+						<option>Sell</option>
+					</select>
+				</div>
+		  </div>
+		  
+		  <div class="form-group">
+			<label class="control-label col-sm-3">Type:</label>
+				<div class="col-sm-4">
+					<select class="form-control" id="type1" name="type1">
+						  <option selected="selected">{{house.Type}}</option>
+						  <option>House</option>
+						  <option>Professional Space</option>
+						  <option>Land</option>
+					</select>
+				</div>
+		  </div>
+		  
+		  <div class="form-group">
+			<label class="control-label col-sm-3">Location:</label>
+				<div class="col-sm-4">
+					<select class="form-control" id="location1" name="location1">
+						  <option selected="selected">{{house.Area}}</option>
+						  <option>North</option>
+						  <option>South</option>
+						  <option>Center</option>
+						  <option>West</option>
+						  <option>East</option>
+					</select>
+				</div>				
+		  </div>		   
+
+          <div class="form-group">
+          <div class="col-sm-2"></div>
+            <label class="control-label col-sm-1">Price:</label>
+            <div class="col-sm-4"><input class="form-control" id="money1" name="money1" placeholder="€" value="{{house.Price}}" type="text" onkeypress="return isNumber(event)"><div class="help"></div></div>
+             <label class="control-label col-sm-1">Size:</label>
+          <div class="col-sm-3"><input class="form-control" id="size1" name="size1" placeholder="cm" value="{{house.Size}}" type="text" onkeypress="return isNumber(event)"><div class="help"></div></div>
+         </div>
+		 
+		<div class="form-group">
+			<label class="control-label col-sm-3">Description:</label>
+				<div class="col-sm-6">
+				<textarea class="form-control" id="description1" name="description1" rows="6">{{house.Description}}</textarea>
+				</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">
+			<input name="submit" value="Submit" type="submit" class="btn btn-info">
+			</div>
+		</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+		<!--<div class="well">{{house.Area}} {{house.Price}} {{house.Size}} {{house.Description}} {{house.Phone}}</div> -->
+	{% endfor %}
+	{% endblock %}
+</div>
+
+<script type="text/javascript">     
+		function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+{% endblock %} 

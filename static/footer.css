@@ -1,0 +1,20 @@
+#footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: auto;
+  background: 
+  
+    /* image to overlay */
+    url(/static/images/footer.jpg) no-repeat center center fixed; ;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover; 
+   
+
+}
+.serif {
+    font-family: "Times New Roman", Times, serif;
+}

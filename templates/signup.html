@@ -1,0 +1,87 @@
+{% extends "Base.html" %}
+{% set active_page = "signup" %}
+{% block content %}   
+<div class="container">
+	<div id="signupbox" style="margin: 20px 0 0 200px ;" class="col-md-8">                    
+		<div class="panel panel-primary" >
+            <div class="panel-heading">
+                <div class="panel-title">Sign Up</div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+            </div>     
+<div style="padding-top:30px" class="panel-body" >
+		   
+	<form class="form-horizontal" method="post" action = "{{ url_for('signup_done') }}" name="signup" id="signup" enctype="multipart/form-data" >   
+		<div class="form-group">
+		<label class="control-label col-sm-3">Username<span class="text-danger">*</span></label>
+			<div class="col-md-5 col-sm-9">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<input type="text" class="form-control" name="user_name" id="user_name" placeholder="Enter your Username here" value="">
+				</div>
+			</div>
+		</div>			
+        <div class="form-group">
+          <label class="control-label col-sm-3">Email<span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-9">
+              <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Enter your Email" value="">
+            </div>
+            <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">First Name <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-9">
+            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter your First Name here" value="">
+          </div>
+        </div>
+		<div class="form-group">
+          <label class="control-label col-sm-3">Last Name <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-9">
+            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter your Last Name here" value="">
+          </div>
+        </div>	
+		<div class="form-group">
+          <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+          	<div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+            <input type="text" class="form-control" name="number" id="number" placeholder="Enter your Primary contact no." value="">
+            </div>
+          </div>
+        </div>		
+        <div class="form-group">
+          <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input type="password" class="form-control" name="password" id="password" placeholder="Choose password (5-15 chars)" value="">
+           </div>   
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
+          <div class="col-md-5 col-sm-8">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password" value="">
+			</div>  
+			<span class="text-danger">{{msg}}</span><p></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span class="label label-danger">Note:-</span> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Policy</a>, including our <a href="#">Cookie Use</a>.</span> </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-offset-3 col-xs-10">
+            <input name="Submit" type="submit" value="Sign Up" class="btn btn-primary">
+          </div>
+        </div>
+		
+    </form>
+</div>
+		</div>
+	</div>
+</div>
+  
+{% endblock %} 

@@ -1,0 +1,137 @@
+{% extends "Base.html" %}
+{% set active_page = "add_home" %}
+{% block content %}   
+  <!--φορμα-->
+{% if session.logged_in%}	
+<div class="container">
+<div class="col-sm-9" id="add_home_style" style="margin-bottom:50px;">
+		<h3>Please fill in all fields:</h3><hr>
+        <form class="form-horizontal" name="add_house" method="post" action = "{{ url_for('upload_file') }}" id="add_house" enctype="multipart/form-data">
+		<br><br>
+          <div class="form-group">
+			<label class="control-label col-sm-3">For:</label>
+				<div class="col-sm-3">
+					<select class="form-control" id="purpose" name="purpose">
+						<option selected="selected">Rent</option>
+						<option>Sell</option>
+					</select>
+				</div>
+		  </div>
+		  
+		  <div class="form-group">
+			<label class="control-label col-sm-3">Type:</label>
+				<div class="col-sm-3">
+					<select class="form-control" id="type" name="type">
+						  <option selected="selected">House</option>
+						  <option>Professional Space</option>
+						  <option>Land</option>
+					</select>
+				</div>
+		  </div>
+		  
+		  <div class="form-group">
+			<label class="control-label col-sm-3">Location:</label>
+				<div class="col-sm-3">
+					<select class="form-control" id="location" name="location">
+						  <option selected="selected">Athens-North</option>
+						  <option>Athens-South</option>
+						  <option>Center</option>
+						  <option>Athens-West</option>
+						  <option>Athens-East</option>
+					</select>
+				</div>
+		  </div>
+		   
+
+          <div class="form-group">
+          <div class="col-sm-2"></div>
+            <label class="control-label col-sm-1">Price:</label>
+            <div class="col-sm-2"><input class="form-control" id="money" name="money" placeholder="€" value="0" type="text" onkeypress="return isNumber(event)"><div class="help"></div></div>
+             <label class="control-label col-sm-1">Size:</label>
+          <div class="col-sm-2"><input class="form-control" id="size" name="size" placeholder="cm" value="0" type="text" onkeypress="return isNumber(event)"><div class="help"></div></div>
+         </div>
+		 
+		<div class="form-group">
+			<label class="control-label col-sm-3">Description:</label>
+				<div class="col-sm-6">
+				<textarea class="form-control" id="description" name="description" rows="4"></textarea>
+			</div>
+		</div>
+		
+		<div class="form-group">		
+			<label class="control-label col-sm-3">Photo:</label>
+				<div class="col-sm-6">
+					<input type="file" accept=".jpg,.gif,.png" class="form-control-file" id="file" name="file" aria-describedby="fileHelp">
+				</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6">		
+		<span class="text-danger">{{msg}}</span><p></p>
+			</div>
+		</div>
+		<div class="form-group">
+		<label class="control-label col-sm-3"></label>
+          <div class="col-sm-5">
+            <input id="upload-file-btn" name="add_house"  type="submit" value="Add House" class="btn btn-primary">
+          </div>
+        </div>
+        
+
+        </form>
+</div>
+</div>
+{% else %}
+<br><br><br><br><br><br><br><br><br>
+<h2>You have to <a href="/signup">register</a> or <a href="/login">login</a> first</h2>
+<br><br><br><br><br><br><br><br><br>
+{% endif %}
+
+<script>
+/*    $(function() {
+        $('#upload-file-btn2').click(function() {
+            var form_data = new FormData($('#add_house')[0]);
+			var purpose = $('#purpose').val();
+			var type = $('#type').val();
+			var location = $('#location').val();
+			var money = $('#money').val();
+			var size = $('size').val();
+			var description = $('description').val();
+			var file = $('#file')[0].files[0];
+            $.ajax({
+                type: 'POST',
+                url: '/upload',
+                data: {
+				purpose:purpose,
+				type:type,
+				location:location,
+				money:money,
+				size:size,
+				description:description,
+				file:file,
+				},
+                contentType: false,
+                cache: false,
+                processData: false,
+                async: true,
+                success: function(data) {
+                    console.log(data);
+                    console.log('Success!');
+                },
+            });
+        });
+    });*/</script>
+
+<script type="text/javascript">     
+		function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+{% endblock %} 

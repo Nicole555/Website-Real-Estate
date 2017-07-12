@@ -1,0 +1,115 @@
+{% extends "Base.html" %}
+{% set active_page = "all_users" %}
+{% block content %}	
+
+
+	<div class="cantable">
+	<div class="table-responsive">
+	<h2>All Users </h2><hr>
+		<table class="table table-bordered" class="table">
+			<thead>
+			<td>UserID</td>
+			<td>First Name</td>
+			<td>Last Name</td>
+			<td>Username</td>			
+			<td>Email</td>
+			<td>Phone number</td>
+			<td>Action</td>
+			</thead> 
+{% for users in allUsers %}		
+            <form action = "{{ url_for('delete_users') }}" method="post">
+			<tr>
+			<td class="col-sm-1"><input class="form-control col-sm-12" id="user_id" name="user_id" value="{{users.UserID}}" type="text" readonly="true"></td>
+			<td>{{users.First_name}}</td>
+			<td>{{users.Last_name}}</td>
+			<td>{{users.Username}}</td>
+			<td>{{users.Email}}</td>
+			<td>{{users.Phone}}</td>
+			<td><button class="btn btnDelete btn-danger btn-space">Delete</button>
+                </form>
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal{{users.UserID}}">Edit User</button></td>
+	{% endfor %}		
+			</tr>  
+			<h3 style="color:red">{{msg}}</h3>
+		</table>
+	</div>
+</div>
+
+
+<!-- Modal -->
+{% for users in allUsers %}		
+<div id="myModal{{users.UserID}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Ad</h4>
+      </div>
+      <div class="modal-body">
+	  <!--here starts form-->
+        <form class="form-horizontal" name="edit_ads" id="add_house" role="form" method="post" action = "{{ url_for('edit_user') }}" enctype="multipart/form-data" >
+		<br>
+		<div class="col-sm-1"></div>
+          <div class="form-group">			  
+			  <label class="control-label col-sm-4">UserIDs:</label>
+			  <div class="col-sm-2"><input class="form-control" id="user_id" name="user_id" value="{{users.UserID}}" type="text" readonly="true"></div>
+		 </div>
+          
+		<div class="col-sm-1"></div>
+          <div class="form-group">
+            <label class="control-label col-sm-4">First name:</label>
+            <div class="col-sm-4"><input class="form-control" id="first_name" name="first_name" value="{{users.First_name}}" type="text"><div class="help"></div></div>
+           </div>
+		   <div class="col-sm-1"></div>
+		   <div class="form-group">
+			<label class="control-label col-sm-4">Last Name:</label>
+          <div class="col-sm-4"><input class="form-control" id="last_name" name="last_name" value="{{users.Last_name}}" type="text"><div class="help"></div></div>
+         </div>
+		 <div class="col-sm-1"></div>
+		 <div class="form-group">
+			<label class="control-label col-sm-4">Username:</label>
+          <div class="col-sm-4"><input class="form-control" id="username" name="username" value="{{users.Username}}" type="text"><div class="help"></div></div>
+         </div>
+		 <div class="col-sm-1"></div>
+		 <div class="form-group">
+			<label class="control-label col-sm-4">Email:</label>
+          <div class="col-sm-4"><input class="form-control" id="email" name="email" value="{{users.Email}}" type="text"><div class="help"></div></div>
+         </div>
+		 <div class="col-sm-1"></div>
+		 <div class="form-group">
+			<label class="control-label col-sm-4">Phone Number:</label>
+          <div class="col-sm-4"><input class="form-control" id="size1" name="phone" value="{{users.Phone}}" type="text" onkeypress="return isNumber(event)"><div class="help"></div></div>
+         </div>		 
+		<div class="col-sm-1"></div>
+		<div class="form-group">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-6">
+			<input name="submit" value="Submit" type="submit" class="btn btn-info">
+			</div>
+		</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endfor %}
+
+<script type="text/javascript">     
+		function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+{% endblock %} 

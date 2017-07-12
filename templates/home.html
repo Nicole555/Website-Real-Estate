@@ -1,0 +1,218 @@
+{% extends "Base.html" %}
+{% set active_page = "home" %}
+{% block content %}   
+{%set index=1%}
+<div class="row">
+    <div class="up" style="background-image: url({{ url_for('static', filename='images/back1.jpg') }})">				
+        <div class="col-md-offset-2 col-md-8 col-sm-12">
+            <div class="panel" id="panel_style">
+                <div class="panel-body">
+                    <br>
+                    <form class="form-horizontal" role="form" name="general" id="general">			   
+                        <div class="form-group">
+                            <div class="col-sm-1"></div>
+                            <label class="control-label col-sm-3">Select Area:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control selectpicker" multiple id="loc" name="loc">
+								    <option selected="selected">Athens-North</option>
+                                    <option>Athens-South</option>
+                                    <option>Center</option>
+                                    <option>Athens-West</option>
+                                    <option>Athens-East</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-1"></div>
+                            <label class="control-label col-sm-3">To:</label>
+                            <div class="col-sm-6">
+                                <select class="form-control selectpicker" multiple id="purp" name="purp">
+                                    <option>Buy</option>
+                                    <option selected="selected">Rent</option>					
+                                </select>
+                            </div>
+                        </div>				
+                        <div class="form-group">
+                            <div class="col-sm-3"></div>
+                            <label class="control-label col-sm-1">From:</label>
+                            <div class="col-sm-2"><input class="form-control" id="money_start" type="text" name="money_from" placeholder="€" value="0" onkeypress="return isNumber(event)"><div class="help"></div></div>
+                            <label class="control-label col-sm-1">To:</label>
+                            <div class="col-sm-2"><input class="form-control" id="money_end" type="text" name="money_to" placeholder="€" value="2000" onkeypress="return isNumber(event)"><div class="help"></div></div>
+                        </div>			
+                        <div class="form-group">
+                            <div class="col-sm-3"></div>
+                            <label class="control-label col-sm-1">From:</label>
+                            <div class="col-sm-2"><input class="form-control" id="tm_start" type="text" min="0" name="meter_from" placeholder="m²" value="0" onkeypress="return isNumber(event)"><div class="help"></div></div>
+                            <label class="control-label col-sm-1">To:</label>
+                            <div class="col-sm-2"><input class="form-control" id="tm_end" type="text" min="0" name="meter_to" placeholder="m²" value="250" onkeypress="return isNumber(event)"><div class="help"></div></div>
+                        </div>		
+                        <hr class="colorgraph">
+                        <div class="col-sm-4"><h4>{{msg}}</h3></div>
+						
+                        <div class="form-group">
+                            <div class="col-sm-5 inner-addon right-addon">
+                                <i class="glyphicon glyphicon-search"></i> 
+                                <input name="submit" id="text-right" value="Search" class="btn btn-default btn-lg" readonly></input>			  
+                        </div>
+                        </div>
+
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="row">
+    <div class="down">
+
+
+        <!--        test -->
+        <div id="myCarousel" class="carousel slide" data-interval="false">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                
+                <div class="item active">
+                    <div class="row">
+                        <div class="col-sm-12 dashboard-panel-12">
+                            <div id="proteinomena" class="panel panel-transparent">
+                                <div class="panel-body">
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <div class="col-md-4 col-sm-4 "></div>										
+                                        <img class="img-rounded img-responsive" src="../static/images/{{houses2[0].Image}}" alt="Cinque Terre" width="250" height="250">               									</div>
+                                    <div class="col-md-6 col-sm-8 ">
+                                        <label>{{houses2[0].User.First_name}} {{houses2[0].User.Last_name}}</label>
+                                        <p>{{houses2[0].Description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>																		
+                    </div>
+                </div>
+                
+                <div class="item">
+                    <div class="row">
+                        <div class="col-sm-12 dashboard-panel-12">
+                            <div id="proteinomena" class="panel panel-transparent">
+                                <div class="panel-body">
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <div class="col-md-4 col-sm-4 "></div>										
+                                        <img class="img-rounded img-responsive" src="../static/images/{{houses2[1].Image}}" alt="Cinque Terre" width="250" height="250">               									</div>
+                                    <div class="col-md-6 col-sm-8 ">
+                                        <label>{{houses2[1].User.First_name}} {{houses2[1].User.Last_name}}</label>
+                                        <p>{{houses2[1].Description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>																		
+                    </div>
+                </div>
+                
+                <div class="item">
+                    <div class="row">
+                        <div class="col-sm-12 dashboard-panel-12">
+                            <div id="proteinomena" class="panel panel-transparent">
+                                <div class="panel-body">
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <div class="col-md-4 col-sm-4 "></div>										
+                                        <img class="img-rounded img-responsive" src="../static/images/{{houses2[2].Image}}" alt="Cinque Terre" width="250" height="250">               									</div>
+                                    <div class="col-md-6 col-sm-8 ">
+                                        <label>{{houses2[2].User.First_name}} {{houses2[2].User.Last_name}}</label>
+                                        <p>{{houses2[2].Description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>																		
+                    </div>
+                </div>
+                
+            </div>
+
+
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+    </div>
+</div>
+<script>
+    $(function() {
+        $('#text-right').click(function() {
+            var locations = $('#loc').val();
+            var purpose =  $('#purp').val();
+            var price_min = $('#money_start').val();
+            var price_max = $('#money_end').val();
+            var size_min = $('#tm_start').val();
+            var size_max = $('#tm_end').val();
+
+            location_param = ""
+            if (locations != null && locations != "" && locations != []){
+                for (var i =0 ;i<locations.length;i++){
+                    console.log(loc)
+                    location_param += "locations="+locations[i]+"&"
+                }
+            }
+            else{
+                location_param+= "locations=&"
+            }
+            purpose_param = ""
+            if (purpose != null && purpose != "" && purpose != [])
+                for (var i =0 ;i<purpose.length;i++){
+                    purpose_param+= "purpose="+purpose[i]+"&"
+                }
+            else{
+                purpose_param+= "purpose=&"
+            }
+            price_min_param = "price_min="
+            if (price_min != null && price_min != ""){
+                price_min_param += price_min
+            }
+            price_min_param += "&"
+            price_max_param = "price_max="
+            if (price_max != null && price_max != ""){
+                price_max_param += price_max
+            }
+            price_max_param += "&"
+            size_min_param = "size_min="
+            if (size_min != null && size_min != ""){
+                size_min_param += size_min
+            }
+            size_min_param += "&"
+            size_max_param = "size_max="
+            if (size_max != null && size_max != ""){
+                size_max_param += size_max
+            }
+            window.location.href = "/general_search?"+location_param+purpose_param+price_min_param+price_max_param+size_min_param+size_max_param
+        });
+    });</script>
+	
+	<script type="text/javascript">     
+		function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+	</script>
+
+{% endblock %} 
+

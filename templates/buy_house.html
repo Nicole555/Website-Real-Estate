@@ -1,0 +1,113 @@
+{% extends "Base.html" %}
+{% set active_page = "buy_house" %}
+{% block content %}	
+	{% block container %}
+	<div class="row">
+	<div class="col-sm-2">
+		<div class="panel panel-default panel-css" style="margin-top:20px">
+			<div class="panel-heading">
+				<h3 class="panel-title">Filters</h3>
+			</div>
+			<div class="panel-body" >
+				<div class="panel-heading " >
+					<h4 class="panel-title">
+						Square meters
+					</h4>
+				</div>
+					<form class="form-horizontal" method="post" action = "{{ url_for('buy_house_filter') }}" name="buy_house_filter" id="buy_house_filter" enctype="multipart/form-data" >   
+
+				<div class="form-group">
+				  <div class="col-sm-6">
+					<label for="ex1">From:</label>
+					<input class="form-control" id="meter_from" name="meter_from1" type="number" min="0" value="0" onkeypress="return isNumber(event)">
+				  </div>
+				  <div class="col-sm-6">
+					<label for="ex2">To:</label>
+					<input class="form-control" id="meter_to" name="meter_to1" type="number" min="0" value="1000" onkeypress="return isNumber(event)">
+				  </div>
+				</div>
+				
+				<div class="panel-heading" >
+					<h4 class="panel-title">
+						Price
+					</h4>
+				</div>
+				
+				<div class="form-group">
+				  <div class="col-sm-6">
+					<label for="ex1">From:</label>
+					<input class="form-control" id="price_from" name="price_from1" type="number" min="0" value="0" onkeypress="return isNumber(event)">
+				  </div>
+				  <div class="col-sm-6">
+					<label for="ex2">To:</label>
+					<input class="form-control" id="price_to" name="price_to1" type="number" min="0" value="100000" onkeypress="return isNumber(event)">
+				  </div>
+				</div>
+				
+				<div class="form-group">
+				  <div class="col-sm-9" style="margin-left:20px">
+					<input name="Refresh" type="submit" value="Refresh" class="btn btn-success btn-block">
+				  </div>
+				</div>
+				
+			</form>
+
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	{% for house in houses %}
+	
+	<div class="col-sm-10 house-css">
+				<ul class="list-group">             
+					<li class="list-group-item">
+						<div class="container-fluid">
+							<div class="imgspace col-sm-3">
+								<!--EDW THA VALOYME EIKONA-->
+								 <img src="/static/images/{{house.Image}}" class="img-responsive" alt="Cinque Terre"> 
+							</div>						
+							<div class="up">
+								<div class="col-sm-5">
+								<label>Location: {{house.Area}} </label>
+								</div>
+								<div class="col-sm-3">
+								<label>Price: {{house.Price}}€</label>
+								</div>
+								<div class="col-sm-3">
+								<label>Size: {{house.Size}} m<sup>2</sup></label>
+								</div>
+								<div class="col-xs-12 col-sm-12">
+								<p>Description: {{house.Description}}
+								</p> 
+								</div>
+								<br>
+								<div class="col-sm-4">
+								<label>Contact Number: {{house.User.Phone}} </label>								
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+		
+		<!--<div class="well">{{house.Area}} {{house.Price}} {{house.Size}} {{house.Description}} {{house.Phone}}</div> -->
+	{% endfor %}
+	{% endblock %}
+</div>
+
+<script type="text/javascript">     
+		function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+{% endblock %} 

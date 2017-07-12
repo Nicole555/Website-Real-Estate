@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Katoikia</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> 
+ <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='shape.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}">
+</head>
+
+
+<body>
+<div class="container-fluid main">
+<div class="row">
+<div class="up"">	<!-- style="background-image: url({{ url_for('static', filename='images/back1.jpg') }})-->
+
+<!--same for all menus-->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Katoikia.gr</a>   
+	</div>
+	<!--users who are logged in-->
+	{% if session.logged_in%}
+	{% set login = 'Welcome '+session['username'] %}	
+		{% if session['Prop'] == 'User' %}			
+			<ul class="nav navbar-nav">	
+				<li {% if active_page == 'home' %} class='active' {% endif %}><a href="/home">Home Page</a></li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Sellings<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li {% if active_page == "buy_house" %} class='active' {% endif %}><a href="/buy_house">Buy House</a></li>
+						<li {% if active_page == "buy_profspace" %} class='active' {% endif %}><a href="/buy_profspace">Buy Professional Space</a></li>
+						<li {% if active_page == "buy_land" %} class='active' {% endif %}><a href="/buy_land">Buy Land</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Rentings<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li {% if active_page == "rent_house" %} class='active' {% endif %}><a href="/rent_house">Rent House</a></li>
+						<li {% if active_page == "rent_profspace" %} class='active' {% endif %}><a href="/rent_profspace">Rent Professional Space</a></li>
+						<li {% if active_page == "rent_land" %} class='active' {% endif %}><a href="/rent_land">Rent Land</a></li>		  
+					</ul>
+				</li>
+				<li {% if active_page == "add_home" %} class='active' {% endif %}><a href="/add_home">Place your ad</a></li>
+				<li {% if active_page == "my_ads" %} class='active' {% endif %}><a href="/my_ads">My ads</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li {% if active_page == 'about_us' %} class='active' {% endif %}><a href="/about_us">About Us</a></li>
+				<li id="msg"><a href="#">{{login}}</a></li>
+				<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+			</ul>
+		{% else %}
+			<ul class="nav navbar-nav">	
+				<li {% if active_page == "home" %} class='active' {% endif %}><a href="/home">Home Page</a></li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Sellings<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li {% if active_page == "buy_house" %} class='active' {% endif %}><a href="/buy_house">Buy House</a></li>
+						<li {% if active_page == "buy_profspace" %} class='active' {% endif %}><a href="/buy_profspace">Buy Professional Space</a></li>
+						<li {% if active_page == "buy_land" %} class='active' {% endif %}><a href="/buy_land">Buy Land</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Rentings<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li {% if active_page == "rent_house" %} class='active' {% endif %}><a href="/rent_house">Rent House</a></li>
+						<li {% if active_page == "rent_profspace" %} class='active' {% endif %}><a href="/rent_profspace">Rent Professional Space</a></li>
+						<li {% if active_page == "rent_land" %} class='active' {% endif %}><a href="/rent_land">Rent Land</a></li>		  
+					</ul>
+				</li>
+				<li {% if active_page == "add_home" %} class='active' {% endif %}><a href="/add_home">Place your ad</a></li>
+				<li {% if active_page == "my_ads" %} class='active' {% endif %}><a href="/my_ads">All ads</a></li>
+				<li {% if active_page == "all_users" %} class='active' {% endif %}><a href="/all_users">All users</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li {% if active_page == 'about_us' %} class='active' {% endif %}><a href="/about_us">About Us</a></li>
+				<li id="msg"><a href="#">{{login}}</a></li>
+				<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+			</ul>
+		{% endif %}    
+	{% else %}
+			<ul class="nav navbar-nav">	
+				<li {% if active_page == 'home' %} class='active' {% endif %}><a href="/home">Home Page</a></li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Sellings<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li {% if active_page == "buy_house" %} class='active' {% endif %}><a href="/buy_house">Buy House</a></li>
+						<li {% if active_page == "buy_profspace" %} class='active' {% endif %}><a href="/buy_profspace">Buy Professional Space</a></li>
+						<li {% if active_page == "buy_land" %} class='active' {% endif %}><a href="/buy_land">Buy Land</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Rentings<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li {% if active_page == "rent_house" %} class='active' {% endif %}><a href="/rent_house">Rent House</a></li>
+						<li {% if active_page == "rent_profspace" %} class='active' {% endif %}><a href="/rent_profspace">Rent Professional Space</a></li>
+						<li {% if active_page == "rent_land" %} class='active' {% endif %}><a href="/rent_land">Rent Land</a></li>		  
+					</ul>
+				</li>
+				<li {% if active_page == "add_home" %} class='active' {% endif %}><a href="/add_home">Place your ad</a></li>
+			</ul>	
+			<ul class="nav navbar-nav navbar-right">
+				<li {% if active_page == 'about_us' %} class='active' {% endif %}><a href="/about_us">About Us</a></li>
+				<li {% if active_page == "signup" %} class='active' {% endif %}><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li {% if active_page == "login" %} class='active' {% endif %}><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+	{% endif %}
+  </div>
+</nav>
+<div class="container-fluid main">
+{%block content%}{%endblock%}
+</div>
+<div id="footer">
+    <div class="container">
+        <div class="row">
+		<br>
+		<div class="col-md-4  col-md-offset-3 serif">
+            <h3 class="footertext">Find the house of your dreams</h3></div>
+		</div>
+		<div class="row">
+           <div class="col-md-4  col-md-offset-5 serif">
+              <h2 class="footer-title">Contact Info:</h2>
+				<div class="single">
+					<p><span class="glyphicon glyphicon-education"></span> Karaoli & Dimitriou St. 80 ,<br> 
+				Piraeus, Greece</p>
+				</div>
+			</div>
+			<div class="col-md-4  col-md-offset-5 serif">
+				<div class="single">
+					<p><span class="glyphicon glyphicon-phone-alt"></span> 21 0414 2000</p>
+				</div>
+			</div>
+			<div class="col-md-4  col-md-offset-5 serif">
+				<div class="single">
+					<p><span class="glyphicon glyphicon-envelope"></span> publ@unipi.gr</p>
+					
+				</div>            
+            </div>
+			</div>
+            <div class="row">
+            <p><center><a href="/about_us">About us</a> <p class="footertext">Copyright 2017</p></center></p>
+        </div>
+    </div>
+</div> 
+</body>
+</html>
